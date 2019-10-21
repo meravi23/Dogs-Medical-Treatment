@@ -1,0 +1,1 @@
+var applic = angular.module("dogsMed", ['ui.bootstrap']);
