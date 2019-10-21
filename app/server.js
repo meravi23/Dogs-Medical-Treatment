@@ -19,7 +19,14 @@ app.get('/doglist', function(req, res) { // doglist = db
     console.log("GET request received");
 
     db.dogs.find(function(err, docs) { // dogs = collection
-        console.log(docs);
+        // console.log(docs);
         res.json(docs);        
+    });
+});
+
+app.post('/doglist', function(req, res) {
+    console.log(req.body);
+    db.dogs.insert(req.body, function(err, doc) {
+        res.json(doc);
     });
 });
