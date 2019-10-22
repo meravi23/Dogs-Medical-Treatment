@@ -8,7 +8,9 @@ const db = mongojs('doglist', ['dogs']); //doglist = db, dogs = collection
 const app = express();
 const port = 5555;
 
+app.use(express.static(__dirname + '/'));
 app.use(express.static(__dirname + '/public'));
+
 app.use(bodyParser.json());
 
 app.listen(port, () => {
