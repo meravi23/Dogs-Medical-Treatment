@@ -5,7 +5,7 @@ var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', func
     // $scope.status = "";
     // $scope.gender = "";
     // $scope.breed = "";
-    // $scope.age = null;
+    $scope.age = null;
     // $scope.neuter = "";
     // $scope.rabbies = null;
     // $scope.distemper1 = null;
@@ -62,14 +62,14 @@ var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', func
         $scope.dog = null;
     };
 
-    $scope.filterByName = function (dog) {
-        if ($scope.name === "") {
-            return true;
-        } else if (dog.name.startsWith($scope.name)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // $scope.filterByName = function (dog) {
+    //     if ($scope.name === "") {
+    //         return true;
+    //     } else if (dog.name.startsWith($scope.name)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 });

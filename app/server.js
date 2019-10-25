@@ -50,14 +50,17 @@ app.put('/dogs/:id', function (req, res) {
                 $set: {
                     name: req.body.name,
                     num: req.body.num,
+                    breed: req.body.breed,
                     status: req.body.status,
                     age: req.body.age,
+                    chip: req.body.chip,
+                    comments: req.body.comments,
                     descrip: req.body.descrip,
-                    distemper1: req.body.distemper1, distemper2: req.body.distemper2, distemper3: req.body.distemper3,
+                    distemper1: req.body.distemper1, distemper2: Date(req.body.distemper2), distemper3: Date(req.body.distemper3),
                     gender: req.body.gender,
                     loc: req.body.loc,
-                    neuter: req.body.neuter,
-                    rabbies: req.body.rabbies
+                    neuter: Date (req.body.neuter),
+                    rabbies: Date(req.body.rabbies)
                 }
             },
             new: true

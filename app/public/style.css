@@ -10,6 +10,10 @@ body {
     margin: 5px;
 }
 
+.form-check-label {
+    margin-right: 20px;
+}
+
 .form-check-input {
-    /* margin-left: 50px; */
+    margin-right: -20px;
 }
