@@ -2,9 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongojs = require('mongojs');
 const db = mongojs('doglist', ['dogs']); //doglist = db, dogs = collection
-// const mongodb = require('mongodb');
-// const fs = require('fs').promises;
-// const fetch = require('node-fetch');
 const app = express();
 const port = 5555;
 
@@ -19,28 +16,6 @@ app.listen(port, () => {
 
 app.get('/dogs', function(req, res) {
     console.log("GET request received");
-
-    // dog1 = {
-    //     name: "סנופי",
-    //     age: 4,
-    //     num: 2562,
-    //     gender: "זכר",
-    //     loc: "כלבייה",
-    //     status: "טופל",
-    //     descrip: "נמצא נטוש בירכא"
-    // };
-    // dog2 = {
-    //     name: "לאקי",
-    //     age: 1,
-    //     num: 2575,
-    //     gender: "נקבה",
-    //     loc: "אומנה",
-    //     status: "פתוח",
-    //     descrip: "אושפזה עקב קדחת קרציות"
-    // }
-
-    // let dogList = [dog1, dog2];
-    // res.json(dogList);
 
     db.dogs.find(function(err, docs) { // dogs = collection
         console.log(docs);
@@ -66,7 +41,7 @@ app.get('/dogs/:id', function(req, res) {
 
 app.put('/dogs/:id', function(req, res) {
     let id = req.params.id;
-    console.log(req.body.name);
+    console.log(req.body);
     db.dogs.findAndModify({query: {_id: mongojs.ObjectId(id)},
         update: {$set: {name: req.body.name, age: req.body.age,
              num: req.body.num, gender: req.body.gender, loc: req.body.loc,
