@@ -43,11 +43,13 @@ app.put('/dogs/:id', function(req, res) {
     let id = req.params.id;
     console.log(req.body);
     db.dogs.findAndModify({query: {_id: mongojs.ObjectId(id)},
-        update: {$set: {name: req.body.name, age: req.body.age,
-             num: req.body.num, gender: req.body.gender, loc: req.body.loc,
-            status: req.body.status, descrip: req.body.descrip, rabbies: req.body.rabbies,
+        update: {$set: {
+             name: req.body.name, 
+             num: req.body.num,  status: req.body.status, 
+             age: req.body.age, descrip: req.body.descrip, 
             distemper1: req.body.distemper1, distemper2: req.body.distemper2, distemper3: req.body.distemper3,
-            neuter: req.body.neuter}},
+            gender: req.body.gender, loc: req.body.loc,
+            neuter: req.body.neuter, rabbies: req.body.rabbies,}},
         new: true}, function(err, doc) {
             res.json(doc);
     });
