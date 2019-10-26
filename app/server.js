@@ -51,6 +51,7 @@ app.put('/dogs/:id', function (req, res) {
                     name: req.body.name,
                     num: req.body.num,
                     breed: req.body.breed,
+                    size: req.body.size,
                     status: req.body.status,
                     age: req.body.age,
                     birthday: req.body.birthday,

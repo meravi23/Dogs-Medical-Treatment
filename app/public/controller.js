@@ -1,7 +1,8 @@
-var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', function AppCtrl($scope, $http) {
+var app = angular.module("dogsMed", ['ui.bootstrap'])
+    .controller('AppCtrl', function AppCtrl($scope, $http) {
 
     $scope.dogSearch = "";
-    $scope.rabbies = "";
+    $scope.sizes = ["זעיר","קטן", "קטן-בינוני", "בינוני", "בינוני-גדול", "גדול", "ענק"];
 
     let refresh = function () {
         $http.get('/dogs').then(function (res) {
@@ -33,9 +34,9 @@ var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', func
         console.log("updating: " + $scope.dog.name);
         console.log("dog id: " + $scope.dog._id);
         $http.put('/dogs/' + $scope.dog._id, $scope.dog)
-        .then(function (res) {
-            refresh();
-        });
+            .then(function (res) {
+                refresh();
+            });
     };
 
     $scope.remove = function (id) {
@@ -59,5 +60,23 @@ var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', func
             return false;
         }
     }
+
+    // $scope.age = function (bday) { // birthday is a date
+    //     if (bday) {
+    //         console.log(bday);
+    //         let birthday = Date(bday);
+    //         console.log((typeof birthday));
+            
+
+    //         var today = new Date();
+    //         var yearNow = today.getFullYear();
+    //         var yearBday = bday.getFullYear();
+    //         var age = yearNow - yearBday;
+    //     }
+    //     return age;
+        // var ageDifMs = Date.now() - birthday.getTime();
+        // var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        // return Math.abs(ageDate.getUTCFullYear() - 1970);
+    //    }
 
 });
