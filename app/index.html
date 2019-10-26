@@ -8,6 +8,8 @@
     <title>מעקב טיפול רפואי בכלבי עמותת כלבלאב</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="public/style.css">
     <!--AngularJS-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
@@ -21,11 +23,22 @@
 <body ng-app="dogsMed" dir="rtl">
     <div class="container" ng-controller="AppCtrl">
         <h1 class="my-3 text-center">מעקב טיפול רפואי בכלבי עמותת כלבלאב</h1>
-        <h2 class="text-center">חיפוש כלב במאגר</h2>
 
-        <form class="search-box">
+        <form action="">
+            <div class="p-1 bg-light border mb-4 col-sm-4">
+                <div class="input-group">
+                    <input type="search" placeholder="חיפוש כלב לפי שם" aria-describedby="button-addon1"
+                        class="form-control border-0 bg-light" ng-model="dogSearch" ng-keypress="showResults=true">
+                    <div class="input-group-append">
+                        <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form>
             <div class="border">
-
                 <div class="row mx-auto">
                     <div class="col-sm-4">
                         <div class="form-group">
@@ -39,74 +52,96 @@
                             <input type="text" class="form-control" id="dog-number" ng-model="dog.num">
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="status"><span class="font-weight-bold">סטטוס</span></label>
-                            <input type="text" class="form-control" id="status" ng-model="dog.status">
-                        </div>
-                    </div>
-                    <div class="col-sm-s">
-                        <div class="form-group">
-                            <label for="loc"><span class="font-weight-bold">מיקום:</span></label>
-                            <input type="text" class="form-control" id="dog-loc" ng-model="dog.loc">
+                   
+                    <div class="col-sm-4"><span class="font-weight-bold">סטטוס</span>
+                        <div class="form-check my-3">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="dog-status" value="בכלבייה"
+                                    ng-model="dog.status">בכלבייה
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="dog-status" value="באומנה"
+                                    ng-model="dog.status">באומנה
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="dog-status" value='באומנה למטרת אימוץ'
+                                    ng-model="dog.status">באל"מ
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="dog-status" value="אומצ/ה"
+                                    ng-model="dog.status">אומצ\ה
+                            </label>
                         </div>
                     </div>
                 </div>
 
                 <div class="row mx-auto">
-                    <div class="col-sm-3"><span class="font-weight-bold">מין:</span>
-                        <div class="form-check">
+                    <div class="col-sm-3"><span class="font-weight-bold">מין</span>
+                        <div class="form-check my-2">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="dog-gender" value="זכר"
                                     ng-model="dog.gender">זכר
                             </label>
-                            <label class="form-check-label">
+                            <label class="form-check-label left">
                                 <input type="radio" class="form-check-input" name="dog-gender" value="נקבה"
                                     ng-model="dog.gender">נקבה
                             </label>
                         </div>
                     </div>
-                    <div class="col-sm-3"><span class="font-weight-bold">גזע:</span>
+                    <div class="col-sm-3"><span class="font-weight-bold">גזע</span>
                         <input type="text" class="form-control" id="dog-breed" ng-model="dog.breed">
                     </div>
-                    <div class="col-sm-3"><span class="font-weight-bold">גיל:</span>
+                    <div class="col-sm-3"><span class="font-weight-bold">גיל</span>
                         <input type="text" class="form-control" id="dog-age" ng-model="dog.age">
                     </div>
-                    <div class="col-sm-3"><span class="font-weight-bold">שבב:</span>
+                    <div class="col-sm-3"><span class="font-weight-bold">שבב</span>
                         <input type="text" class="form-control" id="dog-chip" ng-model="dog.chip">
                     </div>
                 </div>
 
                 <div class="row mx-auto">
-                    <div class="col-sm-6"><span class="font-weight-bold">עיקור:</span>
+                        <div class="col-sm-4"><span class="font-weight-bold">תאריך לידה</span>
+                            <input type="date" class="form-control" id="dog-birthday" ng-model="dog.birthday">
+                        </div>
+                    <div class="col-sm-4"><span class="font-weight-bold">עיקור</span>
                         <input type="date" class="form-control" id="dog-neuter" ng-model="dog.neuter">
                     </div>
-                    <div class="col-sm-6"><span class="font-weight-bold">כלבת:</span>
+                    <div class="col-sm-4"><span class="font-weight-bold">כלבת</span>
                         <input type="date" class="form-control" id="dog-rabbies" ng-model="dog.rabbies">
                     </div>
                 </div>
 
                 <div class="row mx-auto">
-                    <div class="col-sm-4"><span class="font-weight-bold">משושה 1:</span>
+                    <div class="col-sm-4"><span class="font-weight-bold">משושה 1</span>
                         <input type="date" class="form-control" id="dog-distemper1" ng-model="dog.distemper1">
                     </div>
-                    <div class="col-sm-4"><span class="font-weight-bold">משושה 2:</span>
+                    <div class="col-sm-4"><span class="font-weight-bold">משושה 2</span>
                         <input type="date" class="form-control" id="dog-distemper2" ng-model="dog.distemper2">
                     </div>
-                    <div class="col-sm-4"><span class="font-weight-bold">3 משושה:</span>
+                    <div class="col-sm-4"><span class="font-weight-bold">משושה 3</span>
                         <input type="date" class="form-control" id="dog-distemper3" ng-model="dog.distemper3">
                     </div>
                 </div>
 
                 <div class="row mx-auto">
-                    <span class="font-weight-bold">תיאור:</span>
+                    <span class="font-weight-bold">פרטי מאמץ</span>
+                    <input type="text" class="form-control" id="dog-descrip" ng-model="dog.adopter">
+                </div>
+
+                <div class="row mx-auto">
+                    <span class="font-weight-bold">פרטי אומנה</span>
+                    <input type="text" class="form-control" id="dog-descrip" ng-model="dog.foster">
+                </div>
+
+                <div class="row mx-auto">
+                    <span class="font-weight-bold">תיאור</span>
                     <input type="text" class="form-control" id="dog-descrip" ng-model="dog.descrip">
                 </div>
 
                 <div class="row mx-auto">
-                    <span class="font-weight-bold">הערות:</span>
+                    <span class="font-weight-bold">הערות</span>
                     <label for="comments"></label>
-                    <textarea class="form-control" name="comments" id="comments" rows="3"
+                    <textarea class="form-control" name="comments" id="comments" rows="2"
                         ng-model="dog.comments"></textarea>
                 </div>
 
@@ -121,12 +156,11 @@
                         <button class="btn btn-outline-warning" ng-click="clear()">ניקוי</button>
                     </div>
                 </div>
-
             </div>
 
             <div class="dog-list">
                 <uib-accordion close-others="oneAtATime">
-                    <div uib-accordion-group class="mt-1" ng-repeat="dog in dogs">
+                    <div uib-accordion-group class="mt-1" ng-repeat="dog in dogs | filter: filterByName">
                         <uib-accordion-heading>
                             <div class="row">
                                 <div class="col-md-2 my-auto">
@@ -138,26 +172,29 @@
                                 <div class="col-md-2 my-auto">
                                     <button class="btn btn-outline-danger" ng-click="remove(dog._id)">הסרה</button>
                                 </div>
-                                <!-- <div class="col-md-2"><span>סידורי: </span>{{dog._id}}</div> -->
                             </div>
                         </uib-accordion-heading>
                         <div class="row">
                             <div class="col-sm"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
                             <div class="col-sm"><span class="font-weight-bold">גיל: </span>{{dog.age}}</div>
-                            <div class="col-sm"><span class="font-weight-bold">מיקום: </span>{{dog.loc}}</div>
                             <div class="col-sm"><span class="font-weight-bold">סטטוס: </span>{{dog.status}}</div>
                         </div>
                         <div class="row">
                             <div class="col-sm"><span class="font-weight-bold">גזע: </span>{{dog.breed}}</div>
-                            <div class="col-sm"><span class="font-weight-bold">עיקור: </span>{{dog.neuter}}</div>
-                            <div class="col-sm"><span class="font-weight-bold">כלבת: </span>{{dog.rabbies}}</div>
+                            <div class="col-sm"><span class="font-weight-bold">עיקור:
+                                </span>{{dog.neuter | date: "dd/MM/yyyy"}}</div>
+                            <div class="col-sm"><span class="font-weight-bold">כלבת:
+                                </span>{{dog.rabbies | date: "dd/MM/yyyy"}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><span class="font-weight-bold">משושה 1: </span>{{dog.distemper1 | date: "yyyy-MM-dd"}}
+                            <div class="col-md-4"><span class="font-weight-bold">משושה 1:
+                                </span>{{dog.distemper1 | date: "dd/MM/yyyy"}}
                             </div>
-                            <div class="col-md-4"><span class="font-weight-bold">משושה 2: </span>{{dog.distemper2}}
+                            <div class="col-md-4"><span class="font-weight-bold">משושה 2:
+                                </span>{{dog.distemper2 | date: "dd/MM/yyyy"}}
                             </div>
-                            <div class="col-md-4"><span class="font-weight-bold">3 משושה: </span>{{dog.distemper3}}
+                            <div class="col-md-4"><span class="font-weight-bold">3 משושה:
+                                </span>{{dog.distemper3 | date: "dd/MM/yyyy"}}
                             </div>
                         </div>
                         <div class="row">

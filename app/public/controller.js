@@ -1,20 +1,7 @@
 var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', function AppCtrl($scope, $http) {
-    // $scope.name = "";
-    // $scope.num = null;
-    // $scope.loc = "";
-    // $scope.status = "";
-    // $scope.gender = "";
-    // $scope.breed = "";
-    $scope.age = null;
-    // $scope.neuter = "";
-    // $scope.rabbies = null;
-    // $scope.distemper1 = null;
-    // $scope.distemper2 = null;
-    // $scope.distemper3 = null;
-    // $scope.descrip = "";
-    // $scope.comments = "";
-    // $scope.dogs = [];
 
+    $scope.dogSearch = "";
+    $scope.rabbies = "";
 
     let refresh = function () {
         $http.get('/dogs').then(function (res) {
@@ -60,16 +47,17 @@ var app = angular.module("dogsMed", ['ui.bootstrap']).controller('AppCtrl', func
 
     $scope.clear = function () {
         $scope.dog = null;
+        $scope.dogSearch = null;
     };
 
-    // $scope.filterByName = function (dog) {
-    //     if ($scope.name === "") {
-    //         return true;
-    //     } else if (dog.name.startsWith($scope.name)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+    $scope.filterByName = function (dog) {
+        if ($scope.dogSearch === "") {
+            return true;
+        } else if (dog.name.startsWith($scope.dogSearch)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 });

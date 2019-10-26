@@ -17,3 +17,7 @@ body {
 .form-check-input {
     margin-right: -20px;
 }
+
+.left {
+    padding-right: 20px;
+}
