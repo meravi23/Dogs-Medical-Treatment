@@ -98,9 +98,9 @@
                             <div class="col-sm-2"><span class="font-weight-bold">גזע</span>
                                 <input type="text" class="form-control" id="dog-breed" ng-model="dog.breed">
                             </div>
-                            <div class="col-sm-2"><span class="font-weight-bold">גיל</span>
+                            <!-- <div class="col-sm-2"><span class="font-weight-bold">גיל</span>
                                 <input type="text" class="form-control" id="dog-age" ng-model="dog.age">
-                            </div>
+                            </div> -->
                             <div class="col-sm-2"><span class="font-weight-bold">גודל סופי</span>
                                 <select ng-model="dog.size" class="form-control"
                                     ng-options="size for size in sizes"></select>
@@ -187,7 +187,7 @@
                         </uib-accordion-heading>
                         <div class="row">
                             <div class="col-sm-3"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
-                            <div class="col-sm-2"><span class="font-weight-bold">גיל: </span>{{dog.age}}</div>
+                            <div class="col-sm-2"><span class="font-weight-bold">גיל: </span>{{dog.birthday | ageFilter}}</div>
                             <!-- {{age(dog.birthday)}} -->
                             <div class="col-sm-5"><span class="font-weight-bold">תאריך לידה:
                                 </span>{{dog.birthday}}</div>

@@ -61,22 +61,37 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
         }
     }
 
-    // $scope.age = function (bday) { // birthday is a date
-    //     if (bday) {
-    //         console.log(bday);
-    //         let birthday = Date(bday);
-    //         console.log((typeof birthday));
-            
+    // $scope.calculateAge = function (birthday) {
+    //     let bday = new Date(birthday);
+    //     var ageDifMs = Date.now() - bday.getTime();
+    //     var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    //     return Math.abs(ageDate.getUTCFullYear() - 1970);
+    // }
 
-    //         var today = new Date();
-    //         var yearNow = today.getFullYear();
-    //         var yearBday = bday.getFullYear();
-    //         var age = yearNow - yearBday;
-    //     }
-    //     return age;
-        // var ageDifMs = Date.now() - birthday.getTime();
-        // var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        // return Math.abs(ageDate.getUTCFullYear() - 1970);
-    //    }
+  
 
+});
+
+app.filter('ageFilter', function() {
+    function calculateAge(birthday) { // birthday is a date string
+        let bday = new Date(birthday);
+        let ageDifferenceMilSec = Date.now() - bday.getTime();
+        let ageDate = new Date(ageDifferenceMilSec); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+    function monthDiff(d1, d2) {
+      if (d1 < d2){
+       let months = d2.getMonth() - d1.getMonth();
+       return months <= 0 ? 0 : months;
+      }
+      return 0;
+    }       
+    return function(birthdate) { 
+          let age = calculateAge(birthdate);
+          if (age === 0) {
+          let bday = new Date(birthdate);
+            return monthDiff(bday, new Date()) + ' חודשים';
+          }
+          return age;
+    }; 
 });
