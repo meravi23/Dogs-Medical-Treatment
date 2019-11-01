@@ -34,7 +34,9 @@ app.post('/dogs', function (req, res) {
 app.get('/dogs/:id', function (req, res) {
     let id = req.params.id;
     console.log(id);
-    db.dogs.findOne({ _id: mongojs.ObjectId(id) }, function (err, doc) {
+    db.dogs.findOne({
+        _id: mongojs.ObjectId(id)
+    }, function (err, doc) {
         res.json(doc);
     });
 });
@@ -43,39 +45,45 @@ app.put('/dogs/:id', function (req, res) {
     let id = req.params.id;
     console.log(req.body.name);
     console.log("mongo id: " + mongojs.ObjectId(id));
-    db.dogs.findAndModify(
-        {
-            query: { _id: mongojs.ObjectId(id) },
-            update: {
-                $set: {
-                    name: req.body.name,
-                    num: req.body.num,
-                    breed: req.body.breed,
-                    size: req.body.size,
-                    status: req.body.status,
-                    age: req.body.age,
-                    birthday: req.body.birthday,
-                    chip: req.body.chip,
-                    comments: req.body.comments,
-                    descrip: req.body.descrip,
-                    distemper1: req.body.distemper1, distemper2: req.body.distemper2, distemper3: req.body.distemper3,
-                    gender: req.body.gender,
-                    loc: req.body.loc,
-                    neuter: req.body.neuter,
-                    rabbies: req.body.rabbies
-                }
-            },
-            new: true
-        }, function (err, doc) {
-            res.json(doc);
-        });
+    db.dogs.findAndModify({
+        query: {
+            _id: mongojs.ObjectId(id)
+        },
+        update: {
+            $set: {
+                adopter: req.body.adopter,
+                age: req.body.age,
+                birthday: req.body.birthday,
+                breed: req.body.breed,
+                chip: req.body.chip,
+                comments: req.body.comments,
+                descrip: req.body.descrip,
+                distemper1: req.body.distemper1,
+                distemper2: req.body.distemper2,
+                distemper3: req.body.distemper3,
+                foster: req.body.foster,
+                gender: req.body.gender,
+                loc: req.body.loc,
+                name: req.body.name,
+                neuter: req.body.neuter,
+                num: req.body.num,
+                rabbies: req.body.rabbies,
+                size: req.body.size,
+                status: req.body.status
+            }
+        },
+        new: true
+    }, function (err, doc) {
+        res.json(doc);
+    });
 });
 
 app.delete('/dogs/:id', function (req, res) {
     let id = req.params.id;
     console.log(id);
-    db.dogs.remove({ _id: mongojs.ObjectId(id) }, function (err, doc) {
+    db.dogs.remove({
+        _id: mongojs.ObjectId(id)
+    }, function (err, doc) {
         res.json(doc); // sending back to the controller the deleted object
     })
 });
-

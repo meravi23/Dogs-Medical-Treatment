@@ -39,6 +39,9 @@
                 <div class="col-sm-2 my-1">
                     <button class="btn btn-lg btn-outline-warning" ng-click="clear()">ניקוי</button>
                 </div>
+                <div class="col-sm-2 my-1">
+                    <button class="btn btn-lg btn-outline-secondary" ng-click="puppies()">גורים עד גיל חצי שנה</button>
+                </div>
             </div>
         </form>
 
@@ -98,9 +101,6 @@
                             <div class="col-sm-2"><span class="font-weight-bold">גזע</span>
                                 <input type="text" class="form-control" id="dog-breed" ng-model="dog.breed">
                             </div>
-                            <!-- <div class="col-sm-2"><span class="font-weight-bold">גיל</span>
-                                <input type="text" class="form-control" id="dog-age" ng-model="dog.age">
-                            </div> -->
                             <div class="col-sm-2"><span class="font-weight-bold">גודל סופי</span>
                                 <select ng-model="dog.size" class="form-control"
                                     ng-options="size for size in sizes"></select>
@@ -206,6 +206,8 @@
                         <div ng-hide="!dog.distemper2"><span class="font-weight-bold">משושה 2: </span>{{dog.distemper2}}</div>
                         <div ng-hide="!dog.distemper3"><span class="font-weight-bold">משושה 3: </span>{{dog.distemper3}}</div>
                         <div ng-hide="!dog.descrip"><span class="font-weight-bold">תיאור: </span>{{dog.descrip}}</div>
+                        <div ng-hide="!dog.adopter"><span class="font-weight-bold">מאמצים: </span>{{dog.adopter}}</div>
+                        <div ng-hide="!dog.foster"><span class="font-weight-bold">תיאור: </span>{{dog.foster}}</div>
                         <div ng-hide="!dog.comments"><span class="font-weight-bold">הערות: </span>{{dog.comments}}</div>
                     </div>
                 </uib-accordion>

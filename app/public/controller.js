@@ -62,6 +62,12 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
             }
         }
 
+        // $scope.puppies = function () {
+        //     $scope.dogs.forEach(dog => {
+        //         if (dog.age <= )
+        //     });
+        // }
+
     });
 
 app.filter('ageFilter', function () {
@@ -74,12 +80,15 @@ app.filter('ageFilter', function () {
             let now = new Date();
 
             let yearDob = bday.getYear();
-            let monthDob = bday.getMonth() + 1;
+            let monthDob = bday.getMonth();
+            let dayDob = bday.getDay();
             let yearNow = now.getYear();
-            let monthNow = now.getMonth() + 1;
+            let monthNow = now.getMonth();
+            let dayNow = now.getDay();
 
             ageInYears = yearNow - yearDob;
             monthDiff = 0;
+            dayDiff = 0;
 
             if (monthNow >= monthDob) {
                 monthDiff = monthNow - monthDob;
@@ -88,10 +97,19 @@ app.filter('ageFilter', function () {
                 monthDiff = 12 + monthNow - monthDob;
             }
 
-            if (ageInYears > 0) {
-                return (`${ageInYears} שנים ${monthDiff} חודשים`);
+            if (dayNow >= dayDob) {
+                dayDiff = dayNow - dayDob;
             } else {
-                return (`${monthDiff} חודשים`);
+                monthDiff--;
+                dayDiff = 30 + dayNow - dayDob;
+            }
+            dayDiff >= 15 ? monthDiff++ : monthDiff;
+            
+
+            if (ageInYears > 0) {
+                return (`${ageInYears} שנים ${monthDiff+1} חודשים`);
+            } else {
+                return (`${monthDiff+1} חודשים`);
             }
         }
     }
