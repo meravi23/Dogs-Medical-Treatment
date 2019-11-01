@@ -106,31 +106,38 @@
                                     ng-options="size for size in sizes"></select>
                             </div>
                             <div class="col-sm-3"><span class="font-weight-bold">שבב</span>
-                                <input type="text" class="form-control" id="dog-chip" ng-model="dog.chip" placeholder="15 ספרות בדיוק" pattern="[0-9]{15}">
+                                <input type="text" class="form-control" id="dog-chip" ng-model="dog.chip"
+                                    placeholder="15 ספרות בדיוק" pattern="[0-9]{15}">
                             </div>
                         </div>
 
                         <div class="row mx-auto">
                             <div class="col-sm-4"><span class="font-weight-bold">תאריך לידה</span>
-                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-birthday" ng-model="dog.birthday">
+                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-birthday"
+                                    ng-model="dog.birthday">
                             </div>
                             <div class="col-sm-4"><span class="font-weight-bold">עיקור</span>
-                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-neuter" ng-model="dog.neuter">
+                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-neuter"
+                                    ng-model="dog.neuter">
                             </div>
                             <div class="col-sm-4"><span class="font-weight-bold">כלבת</span>
-                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-rabbies" ng-model="dog.rabbies">
+                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-rabbies"
+                                    ng-model="dog.rabbies">
                             </div>
                         </div>
 
                         <div class="row mx-auto">
                             <div class="col-sm-4"><span class="font-weight-bold">משושה 1</span>
-                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-distemper1" ng-model="dog.distemper1">
+                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-distemper1"
+                                    ng-model="dog.distemper1">
                             </div>
                             <div class="col-sm-4"><span class="font-weight-bold">משושה 2</span>
-                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-distemper2" ng-model="dog.distemper2">
+                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-distemper2"
+                                    ng-model="dog.distemper2">
                             </div>
                             <div class="col-sm-4"><span class="font-weight-bold">משושה 3</span>
-                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-distemper3" ng-model="dog.distemper3">
+                                <input type="text" placeholder="dd/mm/yy" class="form-control" id="dog-distemper3"
+                                    ng-model="dog.distemper3">
                             </div>
                         </div>
 
@@ -170,7 +177,8 @@
 
             <div class="dog-list">
                 <uib-accordion close-others="oneAtATime">
-                    <div uib-accordion-group class="mt-1" ng-repeat="dog in dogs | filter: filterByName">
+                    <div uib-accordion-group class="mt-1"
+                        ng-repeat="dog in dogs | orderBy: '-_id' | filter: filterByName">
                         <uib-accordion-heading>
                             <div class="row">
                                 <div class="col-md-2 my-auto">
@@ -185,41 +193,39 @@
                                 </div>
                             </div>
                         </uib-accordion-heading>
-                        <div class="row">
-                            <div class="col-sm-3"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
-                            <div class="col-sm-2"><span class="font-weight-bold">גיל: </span>{{dog.birthday | ageFilter}}</div>
-                            <!-- {{age(dog.birthday)}} -->
-                            <div class="col-sm-5"><span class="font-weight-bold">תאריך לידה:
-                                </span>{{dog.birthday}}</div>
-                            <div class="col-sm-5"><span class="font-weight-bold">סטטוס: </span>{{dog.status}}</div>
-                            <div class="col-sm-2"><span class="font-weight-bold">שבב: </span>{{dog.chip}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm"><span class="font-weight-bold">גזע: </span>{{dog.breed}}</div>
-                            <div class="col-sm"><span class="font-weight-bold">גודל: </span>{{dog.size}}</div>
-                            <div class="col-sm"><span class="font-weight-bold">עיקור:
+                        <!-- <div class="row"> -->
+                            <div class="col-sm-3" ng-hide="!dog.gender"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
+                            <div class="col-sm-2" ng-hide="!dog.birthday"><span class="font-weight-bold">גיל: </span>{{dog.birthday | ageFilter}}</div>
+                            <div class="col-sm-5" ng-hide="!dog.birthday"><span class="font-weight-bold">תאריך לידה: </span>{{dog.birthday}}
+                            </div>
+                            <div class="col-sm-5" ng-hide="!dog.status"><span class="font-weight-bold">סטטוס: </span>{{dog.status}}</div>
+                            <div class="col-sm-2" ng-hide="!dog.chip"><span class="font-weight-bold">שבב: </span>{{dog.chip}}</div>
+                        <!-- </div>
+                        <div class="row"> -->
+                            <div class="col-sm" ng-hide="!dog.breed"><span class="font-weight-bold">גזע: </span>{{dog.breed}}</div>
+                            <div class="col-sm" ng-hide="!dog.size"><span class="font-weight-bold">גודל: </span>{{dog.size}}</div>
+                            <div class="col-sm" ng-hide="!dog.neuter"><span class="font-weight-bold">עיקור:
                                 </span>{{dog.neuter}}</div>
-                                <!-- | date: "dd/MM/yyyy" -->
-                            <div class="col-sm"><span class="font-weight-bold">כלבת:
+                            <div class="col-sm" ng-hide="!dog.rabbies"><span class="font-weight-bold">כלבת:
                                 </span>{{dog.rabbies}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4"><span class="font-weight-bold">משושה 1:
+                        <!-- </div>
+                        <div class="row"> -->
+                            <div class="col-md-4" ng-hide="!dog.distemper1"><span class="font-weight-bold">משושה 1:
                                 </span>{{dog.distemper1}}
                             </div>
-                            <div class="col-md-4"><span class="font-weight-bold">משושה 2:
+                            <div class="col-md-4" ng-hide="!dog.distemper2"><span class="font-weight-bold">משושה 2:
                                 </span>{{dog.distemper2}}
                             </div>
-                            <div class="col-md-4"><span class="font-weight-bold">משושה 3:
+                            <div class="col-md-4" ng-hide="!dog.distemper3"><span class="font-weight-bold">משושה 3:
                                 </span>{{dog.distemper3}}
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm"><span class="font-weight-bold">תיאור: </span>{{dog.descrip}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm"><span class="font-weight-bold">הערות: </span>{{dog.comments}}</div>
-                        </div>
+                        <!-- </div>
+                        <div class="row"> -->
+                            <div class="col-sm" ng-hide="!dog.descrip"><span class="font-weight-bold">תיאור: </span>{{dog.descrip}}</div>
+                        <!-- </div>
+                        <div class="row"> -->
+                            <div class="col-sm" ng-hide="!dog.comments"><span class="font-weight-bold">הערות: </span>{{dog.comments}}</div>
+                        <!-- </div> -->
                     </div>
                 </uib-accordion>
             </div>

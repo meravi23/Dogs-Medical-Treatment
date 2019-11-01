@@ -74,27 +74,30 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
 
 app.filter('ageFilter', function () {
     function calculateAge(birthday) { // birthday is a date string
-        let bday = new Date(birthday);
-        let ageDifferenceMilSec = Date.now() - bday.getTime();
-        let ageDate = new Date(ageDifferenceMilSec); // miliseconds from epoch
+        let bYear = "20" + birthday.substring(6);
+        let bMonth = birthday.substring(3,5);
+        let bDay = birthday.substring(0,2);
+        let bday = new Date(bYear, bMonth, bDay);
+        let now = new Date();
+        
+        let yearDob = bday.getYear();
+        let monthDob = bday.getMonth() + 1;
+        let yearNow = now.getYear();
+        let monthNow = now.getMonth() + 1;
 
-        // var yearDob = bday.getYear();
-        // var monthDob = bday.getMonth();
-        // let now = new Date();        
-        // let yearNow = now.getYear();
-        // let monthNow = now.getMonth()+1;
+        ageInYears = yearNow - yearDob;
+        monthDiff = 0;
 
-        // yearAge = yearNow - yearDob;
-
-        // if (monthNow >= monthDob)
-        //     var monthAge = monthNow - monthDob;
-        // else {
-        //     yearAge--;
-        //     var monthAge = 12 + monthNow -monthDob;
-        // }
-
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
+        if (monthNow >= monthDob) {
+            monthDiff = monthNow - monthDob;
+        } else {
+            ageInYears--;
+            monthDiff = 12 + monthNow - monthDob;
+        }
+       
+        return (`${ageInYears} שנים ${monthDiff} חודשים`);
     }
+
     function monthDiff(d1, d2) {
         if (d1 < d2) {
             let months = d2.getMonth() - d1.getMonth();
@@ -102,6 +105,7 @@ app.filter('ageFilter', function () {
         }
         return 0;
     }
+
     return function (birthdate) {
         let age = calculateAge(birthdate);
         if (age === 0) {
