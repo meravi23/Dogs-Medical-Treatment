@@ -80,15 +80,15 @@ app.filter('ageFilter', function () {
             let now = new Date();
 
             let yearDob = bday.getYear();
-            let monthDob = bday.getMonth();
-            let dayDob = bday.getDay();
+            let monthDob = bday.getMonth()+1;
+            let dayDob = bday.getDate(); // N.B. - *not* getDay() (== Sunday, Monday...)
             let yearNow = now.getYear();
-            let monthNow = now.getMonth();
-            let dayNow = now.getDay();
+            let monthNow = now.getMonth()+1;
+            let dayNow = now.getDate();
 
-            ageInYears = yearNow - yearDob;
-            monthDiff = 0;
-            dayDiff = 0;
+            let ageInYears = yearNow - yearDob;
+            let monthDiff = 0;
+            let dayDiff = 0;
 
             if (monthNow >= monthDob) {
                 monthDiff = monthNow - monthDob;
@@ -100,16 +100,20 @@ app.filter('ageFilter', function () {
             if (dayNow >= dayDob) {
                 dayDiff = dayNow - dayDob;
             } else {
-                monthDiff--;
+                // monthDiff--;
                 dayDiff = 30 + dayNow - dayDob;
             }
-            dayDiff >= 15 ? monthDiff++ : monthDiff;
-            
+            if (dayDiff >= 25 || dayDiff < 5) {
+                monthDiff++;
+            } else if (dayDiff >= 10 && dayDiff < 25) {
+                monthDiff += 0.5;
+            };
+
 
             if (ageInYears > 0) {
-                return (`${ageInYears} שנים ${monthDiff+1} חודשים`);
+                return (`${ageInYears} שנים ${monthDiff} חודשים`);
             } else {
-                return (`${monthDiff+1} חודשים`);
+                return (`${monthDiff} חודשים`);
             }
         }
     }
