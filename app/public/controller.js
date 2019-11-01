@@ -4,6 +4,7 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
         $scope.dogSearch = "";
         $scope.sizes = ["זעיר", "קטן", "קטן-בינוני", "בינוני", "בינוני-גדול", "גדול", "ענק"];
 
+
         let refresh = function () {
             $http.get('/dogs').then(function (res) {
                 console.log(res.data);
@@ -34,14 +35,14 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
             console.log("updating: " + $scope.dog.name);
             console.log("dog id: " + $scope.dog._id);
             $http.put('/dogs/' + $scope.dog._id, $scope.dog)
-                .then(function (res) {
+                .then(function () {
                     refresh();
                 });
         };
 
         $scope.remove = function (id) {
             console.log(id);
-            $http.delete('/dogs/' + id).then(function (res) {
+            $http.delete('/dogs/' + id).then(function () {
                 refresh();
             });
         }
@@ -61,41 +62,38 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
             }
         }
 
-        // $scope.calculateAge = function (birthday) {
-        //     let bday = new Date(birthday);
-        //     var ageDifMs = Date.now() - bday.getTime();
-        //     var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        //     return Math.abs(ageDate.getUTCFullYear() - 1970);
-        // }
-
-
-
     });
 
 app.filter('ageFilter', function () {
     function calculateAge(birthday) { // birthday is a date string
-        let bYear = "20" + birthday.substring(6);
-        let bMonth = birthday.substring(3,5);
-        let bDay = birthday.substring(0,2);
-        let bday = new Date(bYear, bMonth, bDay);
-        let now = new Date();
-        
-        let yearDob = bday.getYear();
-        let monthDob = bday.getMonth() + 1;
-        let yearNow = now.getYear();
-        let monthNow = now.getMonth() + 1;
+        if (birthday) {
+            let bYear = "20" + birthday.substring(6);
+            let bMonth = birthday.substring(3, 5);
+            let bDay = birthday.substring(0, 2);
+            let bday = new Date(bYear, bMonth, bDay);
+            let now = new Date();
 
-        ageInYears = yearNow - yearDob;
-        monthDiff = 0;
+            let yearDob = bday.getYear();
+            let monthDob = bday.getMonth() + 1;
+            let yearNow = now.getYear();
+            let monthNow = now.getMonth() + 1;
 
-        if (monthNow >= monthDob) {
-            monthDiff = monthNow - monthDob;
-        } else {
-            ageInYears--;
-            monthDiff = 12 + monthNow - monthDob;
+            ageInYears = yearNow - yearDob;
+            monthDiff = 0;
+
+            if (monthNow >= monthDob) {
+                monthDiff = monthNow - monthDob;
+            } else {
+                ageInYears--;
+                monthDiff = 12 + monthNow - monthDob;
+            }
+
+            if (ageInYears > 0) {
+                return (`${ageInYears} שנים ${monthDiff} חודשים`);
+            } else {
+                return (`${monthDiff} חודשים`);
+            }
         }
-       
-        return (`${ageInYears} שנים ${monthDiff} חודשים`);
     }
 
     function monthDiff(d1, d2) {

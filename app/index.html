@@ -193,39 +193,20 @@
                                 </div>
                             </div>
                         </uib-accordion-heading>
-                        <!-- <div class="row"> -->
-                            <div class="col-sm-3" ng-hide="!dog.gender"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
-                            <div class="col-sm-2" ng-hide="!dog.birthday"><span class="font-weight-bold">גיל: </span>{{dog.birthday | ageFilter}}</div>
-                            <div class="col-sm-5" ng-hide="!dog.birthday"><span class="font-weight-bold">תאריך לידה: </span>{{dog.birthday}}
-                            </div>
-                            <div class="col-sm-5" ng-hide="!dog.status"><span class="font-weight-bold">סטטוס: </span>{{dog.status}}</div>
-                            <div class="col-sm-2" ng-hide="!dog.chip"><span class="font-weight-bold">שבב: </span>{{dog.chip}}</div>
-                        <!-- </div>
-                        <div class="row"> -->
-                            <div class="col-sm" ng-hide="!dog.breed"><span class="font-weight-bold">גזע: </span>{{dog.breed}}</div>
-                            <div class="col-sm" ng-hide="!dog.size"><span class="font-weight-bold">גודל: </span>{{dog.size}}</div>
-                            <div class="col-sm" ng-hide="!dog.neuter"><span class="font-weight-bold">עיקור:
-                                </span>{{dog.neuter}}</div>
-                            <div class="col-sm" ng-hide="!dog.rabbies"><span class="font-weight-bold">כלבת:
-                                </span>{{dog.rabbies}}</div>
-                        <!-- </div>
-                        <div class="row"> -->
-                            <div class="col-md-4" ng-hide="!dog.distemper1"><span class="font-weight-bold">משושה 1:
-                                </span>{{dog.distemper1}}
-                            </div>
-                            <div class="col-md-4" ng-hide="!dog.distemper2"><span class="font-weight-bold">משושה 2:
-                                </span>{{dog.distemper2}}
-                            </div>
-                            <div class="col-md-4" ng-hide="!dog.distemper3"><span class="font-weight-bold">משושה 3:
-                                </span>{{dog.distemper3}}
-                            </div>
-                        <!-- </div>
-                        <div class="row"> -->
-                            <div class="col-sm" ng-hide="!dog.descrip"><span class="font-weight-bold">תיאור: </span>{{dog.descrip}}</div>
-                        <!-- </div>
-                        <div class="row"> -->
-                            <div class="col-sm" ng-hide="!dog.comments"><span class="font-weight-bold">הערות: </span>{{dog.comments}}</div>
-                        <!-- </div> -->
+                        <div ng-hide="!dog.gender"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
+                        <div ng-hide="!dog.birthday"><span class="font-weight-bold">גיל: </span>{{dog.birthday | ageFilter}}</div>
+                        <div ng-hide="!dog.birthday"><span class="font-weight-bold">תאריך לידה: </span>{{dog.birthday}}</div>
+                        <div ng-hide="!dog.status"><span class="font-weight-bold">סטטוס: </span>{{dog.status}}</div>
+                        <div ng-hide="!dog.chip"><span class="font-weight-bold">שבב: </span>{{dog.chip}}</div>
+                        <div ng-hide="!dog.breed"><span class="font-weight-bold">גזע: </span>{{dog.breed}}</div>
+                        <div ng-hide="!dog.size"><span class="font-weight-bold">גודל: </span>{{dog.size}}</div>
+                        <div ng-hide="!dog.neuter"><span class="font-weight-bold">עיקור: </span>{{dog.neuter}}</div>
+                        <div ng-hide="!dog.rabbies"><span class="font-weight-bold">כלבת: </span>{{dog.rabbies}}</div>
+                        <div ng-hide="!dog.distemper1"><span class="font-weight-bold">משושה 1: </span>{{dog.distemper1}}</div>
+                        <div ng-hide="!dog.distemper2"><span class="font-weight-bold">משושה 2: </span>{{dog.distemper2}}</div>
+                        <div ng-hide="!dog.distemper3"><span class="font-weight-bold">משושה 3: </span>{{dog.distemper3}}</div>
+                        <div ng-hide="!dog.descrip"><span class="font-weight-bold">תיאור: </span>{{dog.descrip}}</div>
+                        <div ng-hide="!dog.comments"><span class="font-weight-bold">הערות: </span>{{dog.comments}}</div>
                     </div>
                 </uib-accordion>
             </div>
