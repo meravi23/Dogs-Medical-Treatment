@@ -80,10 +80,10 @@ app.filter('ageFilter', function () {
             let now = new Date();
 
             let yearDob = bday.getYear();
-            let monthDob = bday.getMonth()+1;
+            let monthDob = bday.getMonth() + 1;
             let dayDob = bday.getDate(); // N.B. - *not* getDay() (== Sunday, Monday...)
             let yearNow = now.getYear();
-            let monthNow = now.getMonth()+1;
+            let monthNow = now.getMonth() + 1;
             let dayNow = now.getDate();
 
             let ageInYears = yearNow - yearDob;
@@ -100,17 +100,16 @@ app.filter('ageFilter', function () {
             if (dayNow >= dayDob) {
                 dayDiff = dayNow - dayDob;
             } else {
-                // monthDiff--;
                 dayDiff = 30 + dayNow - dayDob;
             }
+
             if (dayDiff >= 25 || dayDiff < 5) {
                 monthDiff++;
             } else if (dayDiff >= 10 && dayDiff < 25) {
                 monthDiff += 0.5;
-            };
+            } 
 
-
-            if (ageInYears > 0) {
+            if (ageInYears >= 1) {
                 return (`${ageInYears} שנים ${monthDiff} חודשים`);
             } else {
                 return (`${monthDiff} חודשים`);
@@ -118,20 +117,20 @@ app.filter('ageFilter', function () {
         }
     }
 
-    function monthDiff(d1, d2) {
-        if (d1 < d2) {
-            let months = d2.getMonth() - d1.getMonth();
-            return months <= 0 ? 0 : months;
-        }
-        return 0;
-    }
+    // function monthDiff(d1, d2) {
+    //     if (d1 < d2) {
+    //         let months = d2.getMonth() - d1.getMonth();
+    //         return months <= 0 ? 0 : months;
+    //     }
+    //     return 0;
+    // }
 
     return function (birthdate) {
         let age = calculateAge(birthdate);
-        if (age === 0) {
-            let bday = new Date(birthdate);
-            return monthDiff(bday, new Date()) + ' חודשים';
-        }
+        // if (age === 0) {
+        //     let bday = new Date(birthdate);
+        //     return monthDiff(bday, new Date()) + ' חודשים';
+        // }
         return age;
     };
 });
