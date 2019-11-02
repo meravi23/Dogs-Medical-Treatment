@@ -3,6 +3,7 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
 
         $scope.dogSearch = "";
         $scope.sizes = ["זעיר", "קטן", "קטן-בינוני", "בינוני", "בינוני-גדול", "גדול", "ענק"];
+        $scope.isPuppiesFilterActive = false;
 
 
         let refresh = function () {
@@ -62,13 +63,53 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
             }
         }
 
-        // $scope.puppies = function () {
-        //     $scope.dogs.forEach(dog => {
-        //         if (dog.age <= )
-        //     });
-        // }
+        $scope.activateFilterPuppies = function () {
+            if ($scope.isPuppiesFilterActive) {
+                $scope.isPuppiesFilterActive = false
+            } else {
+                $scope.isPuppiesFilterActive = true;
+            }
+        };
 
+        $scope.filterPuppies = function (dog) {
+            if (!$scope.isPuppiesFilterActive) {
+                return true;
+            } else {
+                let today = new Date();
+                let todayDay = today.getDate();
+                let todayMonth = today.getMonth()+1;
+                let todayYear = today.getFullYear();
+                let now = new Date(todayYear, todayMonth, todayDay);
+
+                if (dog.birthday) {
+                    let bYear = "20" + dog.birthday.substring(6);
+                    let bMonth = dog.birthday.substring(3, 5);
+                    let bDay = dog.birthday.substring(0, 2);
+                    bday = new Date(bYear, bMonth, bDay);
+                }
+
+                calculateDiff = (d1, d2) => {
+                    let diff = Math.abs(d1 - d2);
+                    const diffInDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                    console.log(dog.name + " הפרש: " + diffInDays);
+                    return diffInDays;
+                }
+                
+                diffDays = calculateDiff(now, bday);
+
+            }
+            
+
+            if (diffDays < 210) { // puppies here are dogs up to 7-months-old
+                return true;
+            } else {
+                return false;
+            }
+            
+        }
     });
+
+
 
 app.filter('ageFilter', function () {
     function calculateAge(birthday) { // birthday is a date string
@@ -107,7 +148,7 @@ app.filter('ageFilter', function () {
                 monthDiff++;
             } else if (dayDiff >= 10 && dayDiff < 25) {
                 monthDiff += 0.5;
-            } 
+            }
 
             if (ageInYears >= 1) {
                 return (`${ageInYears} שנים ${monthDiff} חודשים`);
