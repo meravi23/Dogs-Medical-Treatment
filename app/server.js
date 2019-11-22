@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongojs = require('mongojs');
-const db = mongojs('doglist', ['dogs']); //doglist = db, dogs = collection
+const db = mongojs('doglist', ['dogs', 'inactives']); //doglist = db, dogs, inactives = collections
 const app = express();
 const port = 5555;
 
@@ -15,7 +15,7 @@ app.listen(port, () => {
 })
 
 app.get('/dogs', function (req, res) {
-    console.log("GET request received");
+    console.log("GET request for 'dogs' received");
 
     db.dogs.find(function (err, docs) { // dogs = collection
         //console.log(docs);
@@ -25,6 +25,22 @@ app.get('/dogs', function (req, res) {
 
 
 app.post('/dogs', function (req, res) {
+    //console.log(req.body);
+    db.dogs.insert(req.body, function (err, doc) {
+        res.json(doc);
+    });
+});
+
+app.get('/inactives', function (req, res) {
+    console.log("GET request for 'inactives' received");
+
+    db.inactives.find(function (err, docs) {
+        console.log(docs);
+        res.json(docs);
+    });
+});
+
+app.post('/inactives', function (req, res) {
     //console.log(req.body);
     db.dogs.insert(req.body, function (err, doc) {
         res.json(doc);
@@ -51,6 +67,7 @@ app.put('/dogs/:id', function (req, res) {
         },
         update: {
             $set: {
+                active: req.body.active,
                 adopter: req.body.adopter,
                 age: req.body.age,
                 birthday: req.body.birthday,

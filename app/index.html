@@ -10,12 +10,17 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.0.0/css/bootstrap-switch-button.min.css"
+        rel="stylesheet">
     <link rel="stylesheet" href="public/style.css">
+
     <!--AngularJS-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-touch.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.0.0/js/bootstrap-switch-button.min.js"></script>
     <script src="JS/ui-bootstrap-tpls-3.0.6.min.js"></script>
     <script src="public/controller.js"></script>
 </head>
@@ -40,7 +45,8 @@
                     <button class="btn btn-lg btn-outline-warning" ng-click="clear()">ניקוי</button>
                 </div>
                 <div class="col-sm-2 my-1">
-                    <button class="btn btn-lg btn-outline-secondary" ng-click="activateFilterPuppies()">גורים עד גיל חצי שנה</button>
+                    <button class="btn btn-lg btn-outline-secondary" ng-click="activateFilterPuppies()">גורים עד גיל חצי
+                        שנה</button>
                 </div>
             </div>
         </form>
@@ -186,27 +192,39 @@
                                 <div class="col-md-2 my-auto">
                                     <button class="btn btn-outline-dark" ng-click="edit(dog._id)">עריכה</button>
                                 </div>
-                                <div class="col-md-2">{{dog.name}}</div>
-                                <div class="col-md-2">{{dog.gender}}</div>
-                                <div class="col-sm">{{dog.breed}}</div>
-                                <div class="col-md-2">{{dog.num}}</div>
+                                <div class="col-md-1">{{dog.name}}</div>
+                                <div class="col-md-1">{{dog.gender}}</div>
+                                <div class="col-md-1">{{dog.breed}}</div>
+                                <div class="col-md-1">{{dog.num}}</div>
                                 <div class="col-md-2 my-auto">
                                     <button class="btn btn-outline-danger" ng-click="remove(dog._id)">הסרה</button>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-toggle="switchbutton" data-onstyle="success"
+                                        data-onlabel="פעיל" data-offlabel="לא פעיל" checked
+                                        ng-change="deactivateDog()" ng-model="dog.active">
+                                    </label>
                                 </div>
                             </div>
                         </uib-accordion-heading>
                         <div ng-hide="!dog.gender"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
-                        <div ng-hide="!dog.birthday"><span class="font-weight-bold">גיל: </span>{{dog.birthday | ageFilter}}</div>
-                        <div ng-hide="!dog.birthday"><span class="font-weight-bold">תאריך לידה: </span>{{dog.birthday}}</div>
+                        <div ng-hide="!dog.birthday"><span class="font-weight-bold">גיל:
+                            </span>{{dog.birthday | ageFilter}}</div>
+                        <div ng-hide="!dog.birthday"><span class="font-weight-bold">תאריך לידה: </span>{{dog.birthday}}
+                        </div>
                         <div ng-hide="!dog.status"><span class="font-weight-bold">סטטוס: </span>{{dog.status}}</div>
                         <div ng-hide="!dog.chip"><span class="font-weight-bold">שבב: </span>{{dog.chip}}</div>
                         <div ng-hide="!dog.breed"><span class="font-weight-bold">גזע: </span>{{dog.breed}}</div>
                         <div ng-hide="!dog.size"><span class="font-weight-bold">גודל: </span>{{dog.size}}</div>
                         <div ng-hide="!dog.neuter"><span class="font-weight-bold">עיקור: </span>{{dog.neuter}}</div>
                         <div ng-hide="!dog.rabbies"><span class="font-weight-bold">כלבת: </span>{{dog.rabbies}}</div>
-                        <div ng-hide="!dog.distemper1"><span class="font-weight-bold">משושה 1: </span>{{dog.distemper1}}</div>
-                        <div ng-hide="!dog.distemper2"><span class="font-weight-bold">משושה 2: </span>{{dog.distemper2}}</div>
-                        <div ng-hide="!dog.distemper3"><span class="font-weight-bold">משושה 3: </span>{{dog.distemper3}}</div>
+                        <div ng-hide="!dog.distemper1"><span class="font-weight-bold">משושה 1: </span>{{dog.distemper1}}
+                        </div>
+                        <div ng-hide="!dog.distemper2"><span class="font-weight-bold">משושה 2: </span>{{dog.distemper2}}
+                        </div>
+                        <div ng-hide="!dog.distemper3"><span class="font-weight-bold">משושה 3: </span>{{dog.distemper3}}
+                        </div>
                         <div ng-hide="!dog.descrip"><span class="font-weight-bold">תיאור: </span>{{dog.descrip}}</div>
                         <div ng-hide="!dog.adopter"><span class="font-weight-bold">מאמצים: </span>{{dog.adopter}}</div>
                         <div ng-hide="!dog.foster"><span class="font-weight-bold">תיאור: </span>{{dog.foster}}</div>

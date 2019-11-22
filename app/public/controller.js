@@ -4,7 +4,7 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
         $scope.dogSearch = "";
         $scope.sizes = ["זעיר", "קטן", "קטן-בינוני", "בינוני", "בינוני-גדול", "גדול", "ענק"];
         $scope.isPuppiesFilterActive = false;
-
+        $scope.inactiveDogs = [];
 
         let refresh = function () {
             $http.get('/dogs').then(function (res) {
@@ -12,8 +12,26 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
                 $scope.dogs = res.data;
                 $scope.dog = null;
             });
+
+            $http.get('/inactives').then(function (res) {
+                console.log("inactives: " + res.data);
+                $scope.inactiveDogs = res.data;
+            });
         };
         refresh();
+
+        
+        $scope.deactivateDog = function () {
+            console.log(`current dog: ${$scope.dog.name}`);
+
+            if ($scope.dog.active) {
+                $scope.dog.active = false;
+                console.log(`current dog now inactive`);
+            } else {
+                $scope.dog.active = true;
+                console.log(`current dog reactivated`);
+            }
+        };
 
         $scope.addDog = function () {
             $scope.dog._id = null; // this way whenever a new contact is added it is always assigned a new id by the database
@@ -53,6 +71,7 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
             $scope.dogSearch = null;
         };
 
+
         $scope.filterByName = function (dog) {
             if ($scope.dogSearch === "") {
                 return true;
@@ -77,7 +96,7 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
             } else {
                 let today = new Date();
                 let todayDay = today.getDate();
-                let todayMonth = today.getMonth()+1;
+                let todayMonth = today.getMonth() + 1;
                 let todayYear = today.getFullYear();
                 let now = new Date(todayYear, todayMonth, todayDay);
 
@@ -94,18 +113,18 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
                     console.log(dog.name + " הפרש: " + diffInDays);
                     return diffInDays;
                 }
-                
+
                 diffDays = calculateDiff(now, bday);
 
             }
-            
+
 
             if (diffDays < 210) { // puppies here are dogs up to 7-months-old
                 return true;
             } else {
                 return false;
             }
-            
+
         }
     });
 
