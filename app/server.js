@@ -32,8 +32,6 @@ app.post('/dogs', function (req, res) {
 });
 
 app.get('/inactives', function (req, res) {
-    console.log("GET request for 'inactives' received");
-
     db.inactives.find(function (err, docs) {
         console.log(docs);
         res.json(docs);
@@ -72,6 +70,7 @@ app.put('/dogs/:id', function (req, res) {
                 age: req.body.age,
                 birthday: req.body.birthday,
                 breed: req.body.breed,
+                card: req.body.card,
                 chip: req.body.chip,
                 comments: req.body.comments,
                 descrip: req.body.descrip,

@@ -19,8 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-touch.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.0.0/js/bootstrap-switch-button.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.0.0/js/bootstrap-switch-button.min.js"></script>
     <script src="JS/ui-bootstrap-tpls-3.0.6.min.js"></script>
     <script src="public/controller.js"></script>
 </head>
@@ -175,7 +174,19 @@
                             <button class="btn btn-lg btn-outline-info" ng-click="addDog()">הוספת כלב חדש</button>
                         </div>
                         <div class="row my-3">
-                            <button class="btn btn-lg btn-outline-success" ng-click="update(dog._id)">שמירה</button>
+                            <button class="btn btn-lg btn-outline-success" ng-click="update()">שמירה</button>
+                        </div>
+                        <div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" ng-change="deactivateDog('inactive')" ng-model="value" value="inactive" class="form-check-input" name="optradio">לא פעיל
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" ng-change="deactivateDog('active')" ng-model="value" value="active" ng-checked="true" class="form-check-input" name="optradio">פעיל
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -192,22 +203,16 @@
                                 <div class="col-md-2 my-auto">
                                     <button class="btn btn-outline-dark" ng-click="edit(dog._id)">עריכה</button>
                                 </div>
-                                <div class="col-md-1">{{dog.name}}</div>
+                                <div class="col-md-2">{{dog.name}}</div>
                                 <div class="col-md-1">{{dog.gender}}</div>
-                                <div class="col-md-1">{{dog.breed}}</div>
+                                <div class="col-md-2">{{dog.breed}}</div>
                                 <div class="col-md-1">{{dog.num}}</div>
                                 <div class="col-md-2 my-auto">
                                     <button class="btn btn-outline-danger" ng-click="remove(dog._id)">הסרה</button>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" data-toggle="switchbutton" data-onstyle="success"
-                                        data-onlabel="פעיל" data-offlabel="לא פעיל" checked
-                                        ng-change="deactivateDog()" ng-model="dog.active">
-                                    </label>
-                                </div>
                             </div>
                         </uib-accordion-heading>
+                        <div><span class="font-weight-bold">כרטיס: </span>{{dog.card}}</div>
                         <div ng-hide="!dog.gender"><span class="font-weight-bold">מין: </span>{{dog.gender}}</div>
                         <div ng-hide="!dog.birthday"><span class="font-weight-bold">גיל:
                             </span>{{dog.birthday | ageFilter}}</div>

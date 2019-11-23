@@ -4,42 +4,36 @@ var app = angular.module("dogsMed", ['ui.bootstrap'])
         $scope.dogSearch = "";
         $scope.sizes = ["זעיר", "קטן", "קטן-בינוני", "בינוני", "בינוני-גדול", "גדול", "ענק"];
         $scope.isPuppiesFilterActive = false;
-        $scope.inactiveDogs = [];
 
         let refresh = function () {
             $http.get('/dogs').then(function (res) {
-                console.log(res.data);
+                // console.log(res.data);
                 $scope.dogs = res.data;
                 $scope.dog = null;
             });
-
-            $http.get('/inactives').then(function (res) {
-                console.log("inactives: " + res.data);
-                $scope.inactiveDogs = res.data;
-            });
         };
         refresh();
-
-        
-        $scope.deactivateDog = function () {
-            console.log(`current dog: ${$scope.dog.name}`);
-
-            if ($scope.dog.active) {
-                $scope.dog.active = false;
-                console.log(`current dog now inactive`);
-            } else {
-                $scope.dog.active = true;
-                console.log(`current dog reactivated`);
-            }
-        };
-
+ 
         $scope.addDog = function () {
-            $scope.dog._id = null; // this way whenever a new contact is added it is always assigned a new id by the database
+            $scope.dog._id = null; // this way whenever a new dog is added it is always assigned a new id by the database
             console.log($scope.dog);
             $http.post('/dogs', $scope.dog).then(function (res) {
                 console.log(res);
                 refresh();
             });
+        };
+
+        $scope.deactivateDog = function (value) {
+            console.log(`current dog: ${$scope.dog.name}`);
+            if (value === "inactive") {
+                $scope.dog.active = false;
+                console.log(`current dog now inactive`);
+            } else {
+                $scope.dog.active = true;
+                console.log(`current dog now active`);
+            }
+            $scope.dog.card = "";
+            $scope.dog.active ? $scope.dog.card = "פעיל" : $scope.dog.card = "לא פעיל";
         };
 
         $scope.edit = function (id) {
